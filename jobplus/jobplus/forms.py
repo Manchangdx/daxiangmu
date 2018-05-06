@@ -29,7 +29,7 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    name = StringField('用户名/邮箱', validators=[Required()])
+    name = StringField('用户名 / 邮箱', validators=[Required()])
     password = PasswordField('密码', validators=[Required(), Length(6, 24)])
     remember_me = BooleanField('记住我')
     submit = SubmitField('提交')

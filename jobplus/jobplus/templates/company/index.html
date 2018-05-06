@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
+{% from 'macros.html' import render_pagination %}
 
-{% block title %}我的主页{% endblock %}
+{% block title %}公司列表{% endblock %}
 
 {% block body %}
-  <h2>{{ company.name }}</h2>
+  <div class='row'>
+    {% for company in pagination.items %}
+      <div class='col-sm-6 col-md-4 company'>
+        <div class='thumbnail'>
+          <a href="{{ url_for('company.detail', company_id=company.id) }}" target='_blank'>
+            <img src="{{ company.companydetail.image_url }}" alt='公司logo' class='img-circle'>
+            <div class='caption'>
+              <h4 align='center' class='company_name'>{{ company.name }}</h4>
+              <p align='center'>{{ company.jobs | length }} 个热招职位</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {{ render_pagination(pagination, 'company.index') }}
 {% endblock %}

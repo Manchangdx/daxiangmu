@@ -5,8 +5,8 @@ from .models import db, User
 from .config import configs
 
 def register_blueprints(haha):
-    from .handlers import front, admin, user, company
-    for i in (front, admin, user, company):
+    from .handlers import front, admin, user, company, job
+    for i in (front, admin, user, company, job):
         haha.register_blueprint(i)
 
 def register_extensions(app):

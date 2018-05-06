@@ -1,6 +1,3 @@
-body {
-    background-color: #00cc66;
-}
 
 footer{  
     clear: both;  
@@ -8,7 +5,7 @@ footer{
     text-align: center;   
     margin: 0px auto;  
     position: absolute;  
-    bottom: 100px;  
+    bottom: 90px;  
     width: 100%;  
 }
 
@@ -23,15 +20,39 @@ a:visited {
     text-decoration: none !important;
 }
 
-.course_name,
-.course_description {
+.company_name,
+.company_description {
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap
 }
 
-.course img {
+.company img {
     height: 150px !important;
+}
+
+.company-meta {
+    color: #999;
+}
+
+.job-list,
+.company-list {
+  margin-top: 15px;
+}
+
+.job-box {
+    padding: 13px;
+    border: solid 1px #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.list-title {
+  margin: 0 15px;
+}
+
+.company-item {
+  text-align: center;
 }
 
 .nav-pagination {

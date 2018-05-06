@@ -3,7 +3,11 @@ from flask_login import login_required, current_user
 
 user = Blueprint('user', __name__, url_prefix='/user')
 
-@user.route('/<int:user_id>')
-@login_required
+@user.route('/')
 def index(user_id):
     return render_template('user/index.html', user=current_user)
+
+@user.route('/<int:user_id>')
+@login_required
+def profile(user_id):
+    return render_template('user/profile.html')
