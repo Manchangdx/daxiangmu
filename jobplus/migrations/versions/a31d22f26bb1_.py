@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 58d3f6ba169c
+Revision ID: a31d22f26bb1
 Revises: 
-Create Date: 2018-05-06 02:34:04.920310
+Create Date: 2018-05-06 15:12:06.142954
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '58d3f6ba169c'
+revision = 'a31d22f26bb1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -34,8 +34,10 @@ def upgrade():
     sa.Column('create_at', sa.DateTime(), nullable=True),
     sa.Column('update_at', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('location', sa.String(length=64), nullable=False),
-    sa.Column('tags', sa.String(length=128), nullable=True),
+    sa.Column('image_url', sa.String(length=256), nullable=True),
+    sa.Column('finance', sa.String(length=64), nullable=True),
+    sa.Column('staff_num', sa.String(length=64), nullable=True),
+    sa.Column('type', sa.String(length=64), nullable=True),
     sa.Column('about', sa.Text(), nullable=True),
     sa.ForeignKeyConstraint(['id'], ['user.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
@@ -45,12 +47,12 @@ def upgrade():
     sa.Column('update_at', sa.DateTime(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=64), nullable=False),
-    sa.Column('salary_low', sa.Integer(), nullable=True),
-    sa.Column('salary_high', sa.Integer(), nullable=True),
+    sa.Column('salary', sa.String(length=64), nullable=True),
     sa.Column('location', sa.String(length=64), nullable=True),
     sa.Column('experience_requirement', sa.String(length=64), nullable=True),
     sa.Column('degree_requirement', sa.String(length=64), nullable=True),
     sa.Column('is_fulltime', sa.Boolean(), nullable=True),
+    sa.Column('release_time', sa.String(length=64), nullable=True),
     sa.Column('is_open', sa.Boolean(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
