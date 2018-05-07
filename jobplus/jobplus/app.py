@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from .models import db, User
@@ -26,4 +26,10 @@ def create_app(c):
     app.config.from_object(configs.get(c))
     register_extensions(app)
     register_blueprints(app)
+
+    @app.errorhandler(404)
+    def not_asdfaf(error):
+        return render_template('404.html'), 404
+
     return app
+

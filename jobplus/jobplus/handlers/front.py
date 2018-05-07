@@ -51,3 +51,7 @@ def logout():
     logout_user()
     flash('您已退出登录。', 'info')
     return redirect(url_for('.index'))
+
+@front.errorhandler(404)
+def not_f(error):
+    return '四零四', 404

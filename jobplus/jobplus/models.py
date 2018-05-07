@@ -21,6 +21,7 @@ class User(Base, UserMixin):
     email = db.Column(db.String(128), unique=True, index=True, nullable=False)
     _password = db.Column('password', db.String(256), nullable=False)
     role = db.Column(db.SmallInteger, default=ROLE_USER)
+    is_disable = db.Column(db.Boolean, default=False)
 
     resume = db.relationship('Resume', 
         uselist=False, 
