@@ -1,13 +1,15 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_user, login_required, logout_user
 from jobplus.forms import RegisterForm, LoginForm
-from jobplus.models import db, User
+from jobplus.models import db, User, User, Job
 
 front = Blueprint('front', __name__)
 
 @front.route('/')
 def index():
-    return render_template('index.html')
+    companies = [User.query.all()[i] for i in [1, 3, 4]]
+    jobs = [Job.query.all()[i] for i in [32, 11, 22]]
+    return render_template('index.html', companies=companies, jobs=jobs)
 
 @front.route('/userregister', methods=['GET', 'POST'])
 def userregister():
@@ -36,14 +38,17 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(name=form.name.data).first()
-        if user:
-            login_user(user, form.remember_me.data)
-        else:
+        if not user:
             user = User.query.filter_by(email=form.name.data).first()
-            login_user(user, form.remember_me.data)
+        if user.is_disable:
+            flash('用户已经被禁用', 'info')
+            return redirect(url_for('.login'))
+        login_user(user, form.remember_me.data)
         flash('您已登录成功～', 'success')
         return redirect(url_for('.index'))
     return render_template('login.html', form=form)
+
+
 
 @front.route('/logout')
 @login_required
@@ -51,7 +56,3 @@ def logout():
     logout_user()
     flash('您已退出登录。', 'info')
     return redirect(url_for('.index'))
-
-@front.errorhandler(404)
-def not_f(error):
-    return '四零四', 404

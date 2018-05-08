@@ -50,25 +50,34 @@
 
 {% macro render_job(job) %}
   <div class='col-sm-6 col-md-4'>
-    <div clas='job-box'>
+    <div class='job-box'>
       <div class='caption'>
-        <b>{{ job.name }}</b>
-        <p>{{ job.experience_requirement }} | {{ job.degree_requirement }} | {{ job.salary }} | {{ job.location }}</p>
-        <p>发布时间：{{ job.release_time }}</p>
+        <p><font color='008844'><b>{{ job.name }}</b></font><p>
+        <p><font color='444444'>{{ job.experience_requirement }} | {{ job.degree_requirement }} | {{ job.salary }} | {{ job.location }} | {{ job.release_time }}</font></p>
       </div>
       <hr>
       <div clas='media'>
-        <div class='media-left'>
-          <a href='#'>
-            <img class='media-object' src="{{ job.user.companydetail.image_url }}" width='40' height='40' alt='...'>
-          </a>
-        </div>
-        <div class='media-body'>
-          <h4 class='media-heading'>{{ job.user.name }}</h4>
-          <span class='company-meta'>{{ job.user.companydetail.type }} / {{ job.user.companydetail.finance }} / {{ job.user.companydetail.staff_num }}</span>
-        </div>
+        <a href='#'>
+          <div class='media-left'>
+            <img class='media-object img-circle' src="{{ job.user.companydetail.image_url }}" width='40' height='40' alt='...'>
+          </div>
+          <div class='media-body'>
+            <h5 class='media-heading'><font color='FF6600'><b>{{ job.user.name }}</b></font></h5>
+            <span class='company-meta'>{{ job.user.companydetail.type }} / {{ job.user.companydetail.finance }} / {{ job.user.companydetail.staff_num }}</span>
+          </div>
+        </a>
       </div>
     </div>
   </div>
 {% endmacro %}
+
+
+
+
+
+
+
+
+
+
 

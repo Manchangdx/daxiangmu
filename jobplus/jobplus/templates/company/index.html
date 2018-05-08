@@ -11,7 +11,7 @@
           <a href="{{ url_for('company.detail', company_id=company.id) }}" target='_blank'>
             <img src="{{ company.companydetail.image_url }}" alt='公司logo' class='img-circle'>
             <div class='caption'>
-              <h4 align='center' class='company_name'>{{ company.name }}</h4>
+              <h4 align='center' class='company_name'><font color='ff6600'>{{ company.name }}</font></h4>
               <p align='center'>{{ company.jobs | length }} 个热招职位</p>
             </div>
           </a>

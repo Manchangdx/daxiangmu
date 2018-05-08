@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% from 'macros.html' import render_form %}
-
-{% block title %}我的主页{% endblock %}
-
+      
+{% block title %}企业详情{% endblock %}
+        
 {% block body %}
   <div class='row'>
     <div class='col-md-3'>
       <h1>{{ current_user.name }}</h1>
       <h4>{{ current_user.email }}<h4>
+      <h4>{{ current_user.companydetail.type }}</h4>
       <br><br>
       <a href='{{ url_for("company.index") }}'>
         <button type="button" class="btn btn-danger">热门企业</button>
@@ -27,7 +28,7 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>姓名</th>
+            <th>`</th>
             <th>年龄</th>
             <th>工龄</th>
             <th>家乡城市</th>
@@ -42,14 +43,8 @@
           </tbody>
         </thead>
       </table>
-      <br><h4><b>教育经历<b></h4>
-      <h5>{{ current_user.resume.edu_experience }}</h5>
-      <br><h4><b>工作经历<b></h4>
-      <h5>{{ current_user.resume.job_experience }}</h5>
-      <br><h4><b>项目经历<b></h4>
-      <h5>{{ current_user.resume.pro_experience }}</h5>
-      <br>
-      <h5 align='right'><font color='7744ff'>更新时间：{{ current_user.resume.update_at }}</font></h5><br>
     </div>
   </div>
 {% endblock %}
+
+       

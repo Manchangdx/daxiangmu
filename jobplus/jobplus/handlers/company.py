@@ -22,4 +22,5 @@ def profile(company_id):
 
 @company.route('/<int:company_id>/detail')
 def detail(company_id):
-    pass
+    company = User.query.get(company_id)
+    return render_template('company/detail.html', company=company)

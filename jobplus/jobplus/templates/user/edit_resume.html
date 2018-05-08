@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% from 'macros.html' import render_form %}
+
+{% block title %}编辑简历{% endblock %}
+
+{% block body %}
+  <div class='row'>
+    <div class='col-md-3'>
+      <h1>{{ current_user.name }}</h1>
+      <h4>{{ current_user.email }}<h4>
+      <br><br>
+      <a href='{{ url_for("company.index") }}'>
+        <button type="button" class="btn btn-danger">热门企业</button>
+      </a>
+      <br><br>
+      <a href='{{ url_for("job.index") }}'>
+        <button type="button" class="btn btn-info">最新职位</button>
+      </a>
+      <br><br>
+    </div>
+    <div class='col-md-9'>
+      <br><h3 align='center'><font color='green'><b>编辑简历</b></font></h3><br>
+      <div class='form'>
+        {{ render_form(form, url_for('user.edit_resume', user_id=current_user.id)) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}

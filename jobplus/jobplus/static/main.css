@@ -1,12 +1,4 @@
-
-footer{  
-    clear: both;  
-    display: block;  
-    text-align: center;   
-    margin: 0px auto;  
-    position: absolute;  
-    bottom: 90px;  
-    width: 100%;  
+body {
 }
 
 .form {
@@ -17,8 +9,62 @@ footer{
 a,
 a:hover,
 a:visited {
+    cursor: pointer;
     text-decoration: none !important;
 }
+
+tr:active {
+    color: #99ff99;
+}
+
+.nav-pagination {
+    text-align: center;
+    clear: both;
+}
+
+.job-list,
+.company-list {
+    margin-top: 15px;
+}
+
+.job-box {
+    padding: 13px;
+    border: solid 1px #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.list-title {
+    margin: 0 15px;
+}
+
+.company-item {
+    text-align: center;
+}
+
+.header {
+    padding: 0;
+}
+
+.list-more {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.list-more-btn {
+    padding: 10px 138px;
+    color: #5cb85c;
+    background-color: #fff;
+}
+
+.footer {
+    border-top: 1px solid #eee;
+    padding: 16px 0 24px;
+    margin-top: 15px;
+    color: #999;
+    font-size: 14px;
+}
+
 
 .company_name,
 .company_description {
@@ -33,28 +79,4 @@ a:visited {
 
 .company-meta {
     color: #999;
-}
-
-.job-list,
-.company-list {
-  margin-top: 15px;
-}
-
-.job-box {
-    padding: 13px;
-    border: solid 1px #ddd;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-.list-title {
-  margin: 0 15px;
-}
-
-.company-item {
-  text-align: center;
-}
-
-.nav-pagination {
-    text-align: center;
 }

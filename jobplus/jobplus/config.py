@@ -2,7 +2,7 @@ class BaseConfig:
     SECRET_KEY = 'shiyanlou'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     COMPANY_PER_PAGE = 6
-    JOB_PER_PAGE = 6
+    JOB_PER_PAGE = 9
     ADMIN_PER_PAGE = 10
 
 class DevConfig(BaseConfig):

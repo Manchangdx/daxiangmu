@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import render_job %}
+{% from 'macros.html' import render_job, render_pagination %}
 
 {% block title %}职位列表{% endblock %}
 
@@ -9,4 +9,5 @@
       {{ render_job(job) }}
     {% endfor %}
   </div>
+{{ render_pagination(pagination, 'job.index') }}
 {% endblock %}
