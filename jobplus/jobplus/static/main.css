@@ -1,6 +1,10 @@
 body {
 }
 
+p {
+    line-height: 150%;
+}
+
 .form {
     width: 444px;
     margin: 0 auto;

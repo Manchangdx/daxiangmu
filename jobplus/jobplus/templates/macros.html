@@ -51,13 +51,15 @@
 {% macro render_job(job) %}
   <div class='col-sm-6 col-md-4'>
     <div class='job-box'>
+      <a href="{{ url_for('job.detail', job_id=job.id) }}" target='_blank'>
       <div class='caption'>
-        <p><font color='008844'><b>{{ job.name }}</b></font><p>
+        <p align='center'><font color='008844'><b>{{ job.name }}</b></font><p>
         <p><font color='444444'>{{ job.experience_requirement }} | {{ job.degree_requirement }} | {{ job.salary }} | {{ job.location }} | {{ job.release_time }}</font></p>
       </div>
+      </a>
       <hr>
       <div clas='media'>
-        <a href='#'>
+        <a href='{{ url_for("company.detail", company_id=job.user.id) }}' target='_blank'>
           <div class='media-left'>
             <img class='media-object img-circle' src="{{ job.user.companydetail.image_url }}" width='40' height='40' alt='...'>
           </div>

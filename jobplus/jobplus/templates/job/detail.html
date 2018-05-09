@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}职位详情{% endblock %}
+
+{% block body %}
+  <div class='row'>
+    <div class='col-md-3'>
+	  <div align='center'>
+      <img src="{{ job.user.companydetail.image_url }}" alt='logo' width='255'>
+      <br><br>
+      <a href='{{ url_for("company.detail", company_id=job.user.id) }}'>
+        <button type="button" class="btn btn-danger">公司主页</button>
+      </a>
+      <br><br>
+      <a href=''>
+        <button type="button" class="btn btn-info">待定</button>
+      </a>
+      <br><br>
+	  </div>
+    </div>
+    <div class='col-md-9'>
+      <h1><center><font color='deeppink'>{{ job.user.name }}</font></center></h1><br><br>
+      <h4 align='center'>
+        <span>类型：{{ job.user.companydetail.type }}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>邮箱：{{ job.user.email }}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>规模：{{ job.user.companydetail.staff_num }}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>融资：{{ job.user.companydetail.finance }}</span>
+      </h4>
+      <br>
+      <h3 align='center'><font color='ff4500'>公司简介</font></h3>
+      <h4><p align='center'>{{ job.user.companydetail.about }}</p></h4><br>
+      <h3 align='center'><font color='00bfff'>职位详情</font></h3><br>
+	  <div align='center'>
+		<h4>职位名称：{{ job.name }}</h4>
+		<h4>薪资：{{ job.salary }}</h4>
+		<h4>所在城市：{{ job.location }}</h4>
+		<h4>经验要求：{{ job.experience_requirement }}</h4>
+		<h4>学历要求：{{ job.degree_requirement }}</h4>
+		<h4>是否全职：{% if job.is_fulltime %}是{% else %}否{% endif %}</h4>
+		<h4>发布时间：{{ job.create_at }}</h4>
+	  </div>
+	</div>
+  </div>
+{% endblock %}

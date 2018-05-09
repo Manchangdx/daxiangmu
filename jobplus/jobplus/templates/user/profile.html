@@ -6,6 +6,7 @@
 {% block body %}
   <div class='row'>
     <div class='col-md-3'>
+      <div align='center'>
       <h1>{{ current_user.name }}</h1>
       <h4>{{ current_user.email }}<h4>
       <br><br>
@@ -21,6 +22,7 @@
         <button type="button" class="btn btn-success">编辑简历</button>
       </a>
       <br><br>
+      </div>
     </div>
     <div class='col-md-9'>
       <br><h3 align='center'><font color='green'><b>这就是简历</b></font></h3><br>
@@ -48,7 +50,7 @@
       <h5>{{ current_user.resume.job_experience }}</h5>
       <br><h4><b>项目经历<b></h4>
       <h5>{{ current_user.resume.pro_experience }}</h5>
-      <br>
+      <br><br><br><br>
       <h5 align='right'><font color='7744ff'>更新时间：{{ current_user.resume.update_at }}</font></h5><br>
     </div>
   </div>

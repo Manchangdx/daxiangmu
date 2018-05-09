@@ -1,50 +1,44 @@
 {% extends 'base.html' %}
-{% from 'macros.html' import render_form %}
+{% from 'macros.html' import render_form, render_job %}
       
 {% block title %}企业详情{% endblock %}
         
 {% block body %}
   <div class='row'>
     <div class='col-md-3'>
-      <h1>{{ current_user.name }}</h1>
-      <h4>{{ current_user.email }}<h4>
-      <h4>{{ current_user.companydetail.type }}</h4>
-      <br><br>
-      <a href='{{ url_for("company.index") }}'>
-        <button type="button" class="btn btn-danger">热门企业</button>
-      </a>
-      <br><br>
-      <a href='{{ url_for("job.index") }}'>
-        <button type="button" class="btn btn-info">最新职位</button>
-      </a>
-      <br><br>
-      <a href="{{ url_for('user.edit_resume', user_id=current_user.id) }}">
-        <button type="button" class="btn btn-success">编辑简历</button>
-      </a>
+      <img src="{{ company.companydetail.image_url }}" alt='logo' width='255'>
       <br><br>
     </div>
     <div class='col-md-9'>
-      <br><h3 align='center'><font color='green'><b>这就是简历</b></font></h3><br>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>`</th>
-            <th>年龄</th>
-            <th>工龄</th>
-            <th>家乡城市</th>
-          </tr>
-          <tbody>
-            <tr>
-              <td>{% if current_user.resume %}{{ current_user.resume.name }}{% else %}暂无{% endif %}</td>
-              <td>{{ current_user.resume.age }}</td>
-              <td>{{ current_user.resume.work_age }}</td>
-              <td>{{ current_user.resume.home_city }}</td>
-            </tr>
-          </tbody>
-        </thead>
-      </table>
-    </div>
-  </div>
+      <h1><center><font color='deeppink'>{{ company.name }}</font></center></h1><br><br>
+      <h4 align='center'>
+        <span>类型：{{ company.companydetail.type }}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>邮箱：{{ company.email }}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>规模：{{ company.companydetail.staff_num }}</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <span>融资：{{ company.companydetail.finance }}</span>
+      </h4>
+      <br>
+      <h3 align='center'><font color='ff4500'>公司简介</font></h3>
+      <h4><p align='center'>{{ company.companydetail.about }}</p></h4><br>
+      <h3 align='center'><font color='00bfff'>招聘职位</font></h3>
+      <div class='job-list'>
+        {% for job in company.jobs %}
+          <div class='col-sm-6 col-md-4'>
+            <a href="{{ url_for('job.detail', job_id=job.id) }}">
+            <div class='job-box'>
+              <div class='caption'>
+                <p class='company_name' align='center'><font color='008844'><b>{{ job.name }}</b></font><p>
+                <p><font color='444444'>{{ job.experience_requirement }} | {{ job.degree_requirement }} | {{ job.salary }}</font></p>
+                <p><font color='444444'>{{ job.location }} | {{ job.release_time }}</font></p>
+              </div>
+            </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+
 {% endblock %}
 
-       
