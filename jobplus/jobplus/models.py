@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
@@ -9,6 +9,15 @@ class Base(db.Model):
     __abstract__ = True
     create_at = db.Column(db.DateTime, default=datetime.now)
     update_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
+
+
+'''
+resume_job = db.Table(
+    'resume_job',
+    db.Column('resume_id', db.Integer, db.ForeignKey('resume.id'),
+    db.Column('job_id', db.Integer, db.ForeignKey('job.id')
+)
+'''
 
 
 class User(Base, UserMixin):
@@ -106,6 +115,11 @@ class Job(Base):
     def __repr__(self):
         return '<Job: {}>'.format(self.name)
 
+    @property
+    def current_user_is_applied(self):
+        d = Delivery.query.filter_by(job_id=self.id, resume_id=current_user.id).first()
+        return d is not None
+
 
 class Delivery(Base):
     STATUS_WAITING = 11
@@ -113,6 +127,6 @@ class Delivery(Base):
     STATUS_ACCEPT = 33
     id = db.Column(db.Integer, primary_key=True)
     job_id = db.Column(db.Integer, db.ForeignKey('job.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    resume_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     status = db.Column(db.Integer, default=STATUS_WAITING)
     response = db.Column(db.String(256))

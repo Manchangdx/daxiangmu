@@ -12,9 +12,15 @@
         <button type="button" class="btn btn-danger">公司主页</button>
       </a>
       <br><br>
-      <a href=''>
-        <button type="button" class="btn btn-info">待定</button>
-      </a>
+      {% if current_user.is_authenticated %}
+        {% if not job.current_user_is_applied %}
+          <a href='{{ url_for("job.apply", job_id=job.id) }}'>
+            <button type="button" class="btn btn-info">投递简历</button>
+          </a>
+        {% else %}
+          <a href='#'><button type='button' class='btn btn-info'>已投递</button></a>
+        {% endif %}
+      {% endif %}
       <br><br>
 	  </div>
     </div>
