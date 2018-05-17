@@ -110,6 +110,7 @@ class Job(Base):
     is_fulltime = db.Column(db.Boolean, default=True)
     release_time = db.Column(db.String(64))
     is_open = db.Column(db.Boolean, default=True)
+    is_disable = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
