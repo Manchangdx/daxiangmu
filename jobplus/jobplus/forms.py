@@ -46,6 +46,7 @@ class LoginForm(FlaskForm):
             user = User.query.filter_by(email=self.name.data).first()
         if user and not user.check_password(f.data):
             raise ValidationError('密码错误')
+        self.user = user
 
 
 class ResumeForm(FlaskForm):

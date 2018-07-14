@@ -37,9 +37,12 @@ def companyregister():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        '''
         user = User.query.filter_by(name=form.name.data).first()
         if not user:
             user = User.query.filter_by(email=form.name.data).first()
+        '''
+        user = form.user
         if user.is_disable:
             flash('用户已经被禁用', 'info')
             return redirect(url_for('.login'))
