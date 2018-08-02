@@ -83,6 +83,7 @@ class Resume(Base):
     job_experience = db.Column(db.Text)
     edu_experience = db.Column(db.Text)
     pro_experience = db.Column(db.Text)
+    resume_url = db.Column(db.String(128))
 
 
 class CompanyDetail(Base):

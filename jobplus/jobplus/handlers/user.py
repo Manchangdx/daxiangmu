@@ -25,6 +25,7 @@ def edit_resume(user_id):
         )
     form = ResumeForm(obj=resume)
     if form.validate_on_submit():
+        print('------------------------------ok')
         form.get_resume(resume)
         flash('简历已更新~', 'warning')
         return redirect(url_for('.profile', user_id=current_user.id))

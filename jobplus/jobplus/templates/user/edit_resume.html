@@ -21,7 +21,7 @@
     <div class='col-md-9'>
       <br><h3 align='center'><font color='green'><b>编辑简历</b></font></h3><br>
       <div class='form'>
-        {{ render_form(form, url_for('user.edit_resume', user_id=current_user.id)) }}
+        {{ render_form(form, url_for('user.edit_resume', user_id=current_user.id), upload_file='yes') }}
       </div>
     </div>
   </div>
