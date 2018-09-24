@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Seiya 数据分析系统 － G2 图表示例{% endblock %}
+
+{% block content %}
+  <nav aria-label='breadcrumb'>
+    <ol class='breadcrumb'>
+      <li class='breadcrumb-item'><a href='/'>首页</a></li>
+      <li class='breadcrumb-item active' aria-current='page'>G2 图表示例</li>
+    </ol>
+  </nav>
+  <div id='c1'></div>
+{% endblock %}
+
+{% block js %}
+  <script>
+    var data = [
+      {year: '1951 年', sales: 38},
+      {year: '1952 年', sales: 58},
+      {year: '1953 年', sales: 61},
+      {year: '1955 年', sales: 145},
+      {year: '1956 年', sales: 48},
+      {year: '1957 年', sales: 58},
+      {year: '1958 年', sales: 38},
+      {year: '1988 年', sales: 38},
+    ];
+
+    var chart = new G2.Chart({
+      container: 'c1',
+      forceFit: true,
+      height: 500
+    });
+    
+    chart.source(data);
+    chart.scale('sales', {tickInterval: 20});
+    chart.interval().position('year*sales');
+    chart.render()
+  </script>
+  <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.2.8/dist/g2.min.js"></script>
+{% endblock %}
