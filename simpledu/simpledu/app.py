@@ -1,13 +1,16 @@
 from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_sockets import Sockets
 from .config import configs
 from .models import db, User, Course
 
 def register_blueprints(app):
-    from .handlers import front, admin, course
-    for i in (admin, front, course):
+    from .handlers import front, admin, course, live, ws
+    for i in (admin, front, course, live, ws):
         app.register_blueprint(i)
+    sockets = Sockets(app)
+    sockets.register_blueprint(ws)
 
 def register_extensions(app):
     db.init_app(app)

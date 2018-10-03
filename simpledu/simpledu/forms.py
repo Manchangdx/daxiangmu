@@ -35,6 +35,15 @@ class LoginForm(FlaskForm):
     rm = BooleanField('记住我')
     submit = SubmitField('提交')
 
+    def validate_email(self, field):
+        if User.query.filter_by(email=field.data).first() is None:
+            raise ValidationError('邮箱未注册')
+
+    def validate_password(self, field):
+        u = User.query.filter_by(email=self.email.data).first()
+        if u and not u.checkpassword(field.data):
+            raise ValidationError('密码不对')
+
 class CourseForm(FlaskForm):
     name = StringField('课程名称', validators=[DataRequired(), Length(5, 32)])
     description = TextAreaField('课程简介', 
