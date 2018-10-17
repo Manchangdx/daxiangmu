@@ -3,8 +3,8 @@ from flask import url_for
 from flask_wtf import FlaskForm
 from wtforms import (StringField, PasswordField, SubmitField, BooleanField,
     ValidationError, IntegerField, TextAreaField)
-from wtforms.validators import Length, Email, EqualTo, DataRequired
-from flask_wtf.file import FileField, FileRequired
+from wtforms.validators import Length, Email, EqualTo, DataRequired, URL
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 from .models import db, User, CompanyDetail, Resume, Job
 
 class RegisterForm(FlaskForm):
@@ -60,14 +60,14 @@ class ResumeForm(FlaskForm):
     job_experience = TextAreaField('工作经历')
     edu_experience = TextAreaField('教育经历')
     pro_experience = TextAreaField('项目经历')
-    resume = FileField('上传文件', validators=[FileRequired()])
+    resume = FileField('上传文件', 
+        validators=[FileAllowed(['pdf', 'txt', 'py', 'zip'])]
+    )
     submit = SubmitField('提交')
 
     def upload_resume(self):
         f = self.resume.data
-        print(type(f))
         filename = self.name.data + '.haha'
-        print(filename)
         f.save(os.path.join(os.getcwd(), 'jobplus/static/resumes', filename))
         return url_for('static', filename=os.path.join('resumes', filename))
 

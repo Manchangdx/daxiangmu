@@ -16,16 +16,13 @@ def profile(user_id):
 def edit_resume(user_id):
     resume = Resume.query.join(User).filter(User.id==user_id).first()
     if not resume:
+        user=User.query.filter_by(id=user_id).first()
         resume = Resume(
-            user=User.query.filter_by(id=user_id).first(),
-            name='周杰伦',
-            age=22,
-            work_age=1,
-            home_city='布拉格'
+            id=user_id,
+            name=user.name,
         )
     form = ResumeForm(obj=resume)
     if form.validate_on_submit():
-        print('------------------------------ok')
         form.get_resume(resume)
         flash('简历已更新~', 'warning')
         return redirect(url_for('.profile', user_id=current_user.id))

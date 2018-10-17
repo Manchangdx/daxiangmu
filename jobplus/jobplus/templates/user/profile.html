@@ -52,7 +52,7 @@
       <h5>{{ current_user.resume.pro_experience }}</h5>
       <br><br><br><br>
       {% if current_user.resume %}
-        <h2><center><a href="{{ current_user.resume.resume_url }}" target='_blank'>点此下载补充文件</a></center></h2>
+        <h2><center><a href="{{ current_user.resume.resume_url }}" target='_blank'>点此下载简历文件</a></center></h2>
         <h5 align='right'><font color='7744ff'>更新时间：{{ current_user.resume.update_at }}</font></h5><br>
       {% endif %}
     </div>

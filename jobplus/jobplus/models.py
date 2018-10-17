@@ -77,7 +77,7 @@ class Resume(Base):
         primary_key=True
     )
     name = db.Column(db.String(32), nullable=False)
-    age = db.Column(db.SmallInteger, nullable=False)
+    age = db.Column(db.SmallInteger)
     work_age = db.Column(db.SmallInteger)
     home_city = db.Column(db.String(64))
     job_experience = db.Column(db.Text)
