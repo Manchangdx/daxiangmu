@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}工作经验统计{% endblock %}
+
+{% block content %}
+  <nav aria-label='breadcrumb'>
+    <ol class='breadcrumb'>
+      <li class='breadcrumb-item'><a href='/'>首页</a></li>
+      <li class='breadcrumb-item'><a href='/job'>拉勾网职位数据分析</a></li>
+      <li class='breadcrumb-item active' aria-current='page'>工作经验统计</li>
+    </ol>
+  </nav>
+  <div class='my-5' id='chart'></div>
+  <div>haha</div>
+{% endblock %}
+
+{% block js %}
+  <p>ok</p>
+  <script>
+    var data = {{ query|tojson|safe }};
+    var chart = new G2.Chart({
+      container: 'chart',
+      forceFit: true,
+      height: 500
+    });
+
+    chart.source(data, {
+      percent: {
+        formatter: function formatter(val) {
+          val = val * 100 + '%';
+          return val;
+        }
+      }
+    });
+
+    chart.coord('theta', {radius: 0.75});
+
+    chart.tooltip({
+      showTitle: false,
+      itemTpl: '<li><span style="background-color:{color};" class="g2-tooltip-marker"></span>{name}: {value}</li>'
+    });
+    console.log('haha');
+    console.log(data);
+    chart.intervalStack().position('percent').color('experience').label('percent', {
+      formatter: function formatter(val, item) {
+        return item.point.experience + ': ' + val;
+      }
+    }).tooltip('experience*count', (experience, count) {
+      return {
+        name: experience,
+        value: count
+      };
+    }).style({
+      lineWidth: 1,
+      stroke: '#fff'
+    });
+
+    chart.render();
+  </script>
+  <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g2-3.2.8/dist/g2.min.js"></script>
+  <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.9.6/dist/data-set.min.js"></script>
+{% endblock %}

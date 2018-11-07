@@ -33,6 +33,16 @@ def job_hot_tags_plot():
     # 这里就是将一张图的数据直接发送给浏览器
     return Response(job.hot_tags_plot(), content_type='image/png')
 
+@app.route('/job/experience_stats')
+def job_experience_stats():
+    query = job.experience_stats()
+    return render_template('job/experience_stats.html', query=query)
+
+@app.route('/job/education_stats')
+def job_education_stats():
+    query = job.education_stats()
+    return render_template('job/education_stats.html', query=query)
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404

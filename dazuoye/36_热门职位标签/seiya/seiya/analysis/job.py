@@ -40,9 +40,32 @@ def hot_tags_plot(format='png'):
     mpl.rcParams['font.sans-serif'] = ['SimHei']  # 设置中文字体
     mpl.rcParams['axes.unicode_minus'] = False  
     mpl.rcParams['figure.figsize'] = 8, 4  # 设置画布宽高，单位英寸
+    myfont = mpl.font_manager.FontProperties(
+        fname = '/usr/share/fonts/truetype/wqy/wqy-microhei.ttc'
+    )
     s = _hot_tags()
     plt.bar(s.index, s.values, color='green')
+    plt.title(u'热门职位标签', fontproperties=myfont)
     img = BytesIO()  # 开启进入内存空间之门
     plt.savefig(img, format=format)  # 把整个图的数据放到内存中
     return img.getvalue()
+
+def experience_stats():
+    query = session.query(
+        Job.experience, 
+        func.count(Job.experience).label('count')
+    ).group_by('experience').order_by(desc('count'))
+    l = [i._asdict() for i in query]
+    z = sum([i['count'] for i in l])
+    for i in l:
+        i['percent'] = float(format(i['count'] / z, '.3f'))
+    l[-1]['percent'] = (1000 - 1000 * sum([i['percent'] for i in l[:-1]]))/1000
+    return l
+
+def education_stats():
+    query = session.query(
+        Job.education, 
+        func.count(Job.education).label('count')
+    ).group_by('education').order_by(desc('count'))
+    return [i._asdict() for i in query]
 
