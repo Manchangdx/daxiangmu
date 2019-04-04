@@ -13,4 +13,3 @@ flask-migrate
 flask-wtf
 mysqlclient
 faker
-fake-useragent

@@ -1,29 +1,33 @@
+import re
 import scrapy
 from ..items import JobItem
 
+
 class JobSpider(scrapy.Spider):
     name = 'jobs'
-    headers = {
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36',
-        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-        'accept-encoding': 'gzip, deflate, br',
-        'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8',
-        'Connection': 'keep-alive',
-        'Cache-Control': 'max-age=0'
-    }
-
-    def start_requests(self):
-        urls = ['https://www.lagou.com/zhaopin/{}/?filterOption=2'.format(i) for i in range(1, 31)]
-        for i in urls:
-            yield scrapy.Request(url=i, callback=self.parse, headers=self.headers)
+    url_temp = 'https://www.lagou.com/zhaopin/{}/'
+    start_urls = (__class__.url_temp.format(i) for i in range(1, 31))
 
     def parse(self, response):
-        for i in response.css('li.con_list_item.default_list'):
-            yield JobItem({
-                'title': i.css('h3::text').extract_first(),
-                'city': i.css('em::text').extract_first(),
-                'salary': i.css('span.money::text').extract_first(),
-                'exp_edu': i.css('div.li_b_l::text').extract()[2].strip(),
-                'tags': i.css('div.industry::text').extract_first(),
-                'company': i.css('div.company_name a::text').extract_first()
-            })
+        print(response.url)
+        for i in response.css('li.con_list_item'):
+            salary = i.css('div.p_bot span::text').re('(\d+)k-(\d+)k')
+            salary_list = salary if salary else [0, 0]
+            experience, education = i.css('div.li_b_l::text'
+                    ).extract()[2].strip().split(' / ')
+            experience = re.findall('\d+', experience)
+            experience_list = experience if experience else [0, 0]
+            experience_list = experience if len(experience) > 1 else [0, 1]
+            if len(experience) == 1:
+                experience_list = [0, 1]
+            yield JobItem(
+                title = i.css('h3::text').extract_first(),
+                city = i.xpath('.//em/text()').extract_first(),
+                salary_low = int(salary_list[0]),
+                salary_up = int(salary_list[1]),
+                experience_low = int(experience_list[0]),
+                experience_up = int(experience_list[1]),
+                education = education,
+                tags = ' '.join(i.css('div.list_item_bot span::text').extract()),
+                company = i.css('div.company a::text').extract_first()
+            )
