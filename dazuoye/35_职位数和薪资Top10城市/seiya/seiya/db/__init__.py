@@ -1,2 +1,2 @@
-from .base import session, Base, engine
+from .base import engine, Base, session
 from .job import Job

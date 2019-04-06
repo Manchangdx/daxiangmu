@@ -22,7 +22,7 @@ class JobSpider(scrapy.Spider):
                 experience_list = [0, 1]
             yield JobItem(
                 title = i.css('h3::text').extract_first(),
-                city = i.xpath('.//em/text()').extract_first(),
+                city = i.xpath('.//em/text()').extract_first().split('·')[0],
                 salary_low = int(salary_list[0]),
                 salary_up = int(salary_list[1]),
                 experience_low = int(experience_list[0]),
