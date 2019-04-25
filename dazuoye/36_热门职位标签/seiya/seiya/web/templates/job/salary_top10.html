@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}薪资最高城市 Top10{% endblock %}
+{% block title %}职位最多的城市 Top10{% endblock %}
 
 {% block content %}
-  <nav aria-label='breadcrumb'>
+  <nav alia-label='breadcrumb'>
     <ol class='breadcrumb'>
       <li class='breadcrumb-item'><a href='/'>首页</a></li>
       <li class='breadcrumb-item'><a href='/job'>拉勾网职位数据分析</a></li>
-      <li class='breadcrumb-item active' aria-current='page'>薪资最高城市 Top10</li>
+      <li class='breadcrumb-item active' alia-current='page'>薪资最高城市 Top10</li>
     </ol>
   </nav>
   <div class='my-5' id='c1'></div>
@@ -23,8 +23,8 @@
       {% for i in query %}
         <tr>
           <th scope='row'>{{ loop.index }}</th>
-          <td>{{ i.city }}</td>
-          <td>{{ i.salary }}</td>
+          <th>{{ i.city }}</th>
+          <th>{{ i.salary | round(1, 'floor') }}</th>
         </tr>
       {% endfor %}
     </tbody>
@@ -33,15 +33,17 @@
 
 {% block js %}
   <script>
-    const data = {{ query|tojson }};
+    const data = {{ query | tojson }};
     const chart = new G2.Chart({
-      container: 'c1',
+      container: c1,
       forceFit: true,
       height: 500
     });
     chart.source(data);
-    chart.scale('sales', {tickInterval: 10});
-    chart.interval().position('city*salary');
-    chart.render();
+    chart.scale({
+      salary: {tickInterval: 5, alias: '平均薪资'}
+    });
+    chart.interval().position('city*salary').color('#36B3C3');
+    chart.render()
   </script>
 {% endblock %}
