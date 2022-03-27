@@ -67,9 +67,10 @@ class ResumeForm(FlaskForm):
 
     def upload_resume(self):
         f = self.resume.data
-        filename = self.name.data + '.haha'
-        f.save(os.path.join(os.getcwd(), 'jobplus/static/resumes', filename))
-        return url_for('static', filename=os.path.join('resumes', filename))
+        if f:
+            filename = self.name.data + '.haha'
+            f.save(os.path.join(os.getcwd(), 'jobplus/static/resumes', filename))
+            return url_for('static', filename=os.path.join('resumes', filename))
 
     def get_resume(self, resume):
         self.populate_obj(resume)

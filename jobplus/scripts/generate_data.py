@@ -2,6 +2,9 @@ import os, json, sys
 from faker import Faker
 from random import randint
 from jobplus.models import db, User, CompanyDetail, Job
+from manage import app
+
+app.app_context().push()
 
 fake = Faker('zh-cn')
 
@@ -59,3 +62,5 @@ def run():
     db.session.commit()
 
 
+if __name__ == '__main__':
+    run()
