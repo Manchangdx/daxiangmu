@@ -7,6 +7,8 @@ unzip jobplus.zip
 cd jobplus
 
 # 安装依赖库
+sudo apt update
+sudo apt install -y libmysqlclient-dev
 sudo pip install -r requirements.txt
 
 # 启动 MySQL 服务，创建数据库
